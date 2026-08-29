@@ -153,6 +153,8 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--blaze);outline-offs
 .fine{font-size:13.5px;line-height:1.55;color:rgba(242,237,226,.72);
   max-width:46ch;margin:20px auto 0}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.err{display:none;font-family:var(--text);font-size:14px;line-height:1.5;
+  color:#F0A57A;margin:16px auto 0;max-width:44ch}
 .done{display:none;font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;
   text-transform:uppercase;color:var(--blaze);margin:8px 0 0}
 .signup.is-done .field,.signup.is-done .fine{display:none}
@@ -291,7 +293,8 @@ h2.head{font-family:var(--display);font-weight:600;color:var(--bark);
         <button type="submit">Submit</button>
       </div>
       <p class="fine">Sent to your inbox in a couple of minutes. You'll also receive occasional field notes on keeping dogs working throughout the year. Unsubscribe any time.</p>
-      <p class="done">Keep an eye out for the confirmation email. Your guide is on its way.</p>
+      <p class="err" id="formerr" role="alert"></p>
+        <p class="done">Check your inbox. Click the button in the confirmation email and the guide is on its way.</p>
     </form>
   </div>
 </section>
@@ -438,13 +441,76 @@ if('IntersectionObserver' in window){
   var f=document.getElementById('source'); if(f && src) f.value=src;
 })();
 
-/* placeholder submit - replace when the ESP embed goes in */
-document.getElementById('form').addEventListener('submit', function(e){
-  e.preventDefault();
-  var em=document.getElementById('email');
-  if(!em.value || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.value)){ em.focus(); return; }
-  document.getElementById('guide').classList.add('is-done');
-});
+/* ==================================================================
+   KLAVIYO SUBSCRIBE
+   Public company ID is safe in browser code. Never put a private key here.
+   PASTE YOUR LIST ID BELOW - Lists & Segments > Field Notes > the ID is
+   in the browser URL, six characters, e.g. .../list/AbC123
+   ================================================================== */
+var KLAVIYO_COMPANY_ID = 'XC2qf2';
+var KLAVIYO_LIST_ID    = 'UDzgkP';
+var KLAVIYO_REVISION   = '2026-07-15';
+
+(function(){
+  var form = document.getElementById('form');
+  var card = document.getElementById('guide');
+  var em   = document.getElementById('email');
+  var btn  = form.querySelector('button[type=submit]');
+  var err  = document.getElementById('formerr');
+
+  function fail(msg){
+    err.textContent = msg;
+    err.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Submit';
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    err.style.display = 'none';
+
+    if(!em.value || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.value)){
+      em.focus(); fail('That address does not look right. Mind checking it?'); return;
+    }
+    if(form.querySelector('input[name=company]').value){ return; }   // honeypot
+    if(!KLAVIYO_LIST_ID || !KLAVIYO_COMPANY_ID){
+      fail('Signup is not connected yet.'); return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending';
+
+    fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_COMPANY_ID, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'revision': KLAVIYO_REVISION },
+      body: JSON.stringify({
+        data: {
+          type: 'subscription',
+          attributes: {
+            custom_source: document.getElementById('source').value || 'site',
+            profile: {
+              data: {
+                type: 'profile',
+                attributes: {
+                  email: em.value.trim(),
+                  properties: { source: document.getElementById('source').value || 'site' }
+                }
+              }
+            }
+          },
+          relationships: { list: { data: { type: 'list', id: KLAVIYO_LIST_ID } } }
+        }
+      })
+    })
+    .then(function(r){
+      if(r.status === 202 || r.ok){ card.classList.add('is-done'); }
+      else { fail('Something went wrong on our end. Try again in a moment, or email pj@brushworn.com.'); }
+    })
+    .catch(function(){
+      fail('Could not reach the server. Check your connection and try again.');
+    });
+  });
+})();
 </script>
 </body>
 </html>
