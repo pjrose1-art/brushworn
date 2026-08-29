@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy — Brushworn</title>
+<title>Privacy | Brushworn</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJCcnVzaHdvcm4iPjx0aXRsZT5CcnVzaHdvcm48L3RpdGxlPjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiBmaWxsPSIjRTA2MTFGIj48L3JlY3Q+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTE0LjY2MSA0MTQuNzIpIHNjYWxlKDAuNDQwMykiPjxwYXRoIGZpbGw9IiNGMkVERTIiIGQ9Ik0zNjkgMEwxMDIgMEwxMDItNzIxTDM0NS03MjFRNDI5LTcyMSA0ODcuNTAtNzAxUTU0Ni02ODEgNTc2LjUwLTYzOVE2MDctNTk3IDYwNy01MzFMNjA3LTUzMVE2MDctNDk0IDU5Mi00NjNRNTc3LTQzMiA1NDguNTAtNDA5UTUyMC0zODYgNDc3LTM3Mkw0NzctMzcyUTU1Mi0zNTYgNTkwLTMxNS41MFE2MjgtMjc1IDYyOC0yMTBMNjI4LTIxMFE2MjgtMTQ2IDU5Ni41MC05OVE1NjUtNTIgNTA3LTI2UTQ0OSAwIDM2OSAwTDM2OSAwWk0yMjUtMzIxTDIyNS05NUwzNjctOTVRNDM5LTk1IDQ3My0xMjdRNTA3LTE1OSA1MDctMjEzTDUwNy0yMTNRNTA3LTI2NCA0NzMtMjkyLjUwUTQzOS0zMjEgMzY3LTMyMUwzNjctMzIxTDIyNS0zMjFaTTIyNS02MjZMMjI1LTQwNUwzMzktNDA1UTM4NS00MDUgNDE3LjUwLTQxN1E0NTAtNDI5IDQ2Ny41MC00NTRRNDg1LTQ3OSA0ODUtNTE2TDQ4NS01MTZRNDg1LTU3NSA0NTEtNjAwLjUwUTQxNy02MjYgMzQ1LTYyNkwzNDUtNjI2TDIyNS02MjZaTTEyOSAwTDI4IDBMMjgtNTJRMjgtNjQgMzQuNTAtNzAuNTBRNDEtNzcgNTMtNzlMNTMtNzlMMTE2LTkyTDEyOSAwWk0yOC03MjFMMTI5LTcyMUwxMTYtNjI5TDUzLTY0MlE0MS02NDUgMzQuNTAtNjUxLjUwUTI4LTY1OCAyOC02NzBMMjgtNjcwTDI4LTcyMVoiPjwvcGF0aD48L2c+PC9zdmc+" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -15,22 +15,22 @@
 --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--display:'Aleo',Georgia,serif;
 --text:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--body);font-family:var(--text);
+body{margin:0;background:var(--bone);color:var(--body);font-family:var(--text);
 font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased}
 .wrap{max-width:680px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
-.wm{--bw-word:var(--bone); --bw-rule:rgba(242,237,226,.6); --bw-rule-w:1px;
+.wm{--bw-word:#1B1713; --bw-rule:#E0611F; --bw-rule-w:1.5px;
   display:inline-block;font-family:var(--display);font-weight:600;
   letter-spacing:.10em;text-indent:.10em;line-height:1;font-size:clamp(26px,2.3vw,29px);
   text-transform:uppercase;text-decoration:none;white-space:nowrap;color:var(--bw-word);
   border-top:var(--bw-rule-w) solid var(--bw-rule);
   border-bottom:var(--bw-rule-w) solid var(--bw-rule);
-  padding-block:.32em;text-shadow:0 1px 12px rgba(20,17,15,.35);
-  transition:color .3s ease,border-color .3s ease,border-width .3s ease}
+  padding-block:.32em;}
 header{position:fixed;top:0;left:0;right:0;z-index:20;height:76px;display:flex;
-  align-items:center;background:var(--bone);border-bottom:1px solid var(--blaze);
-  transition:box-shadow .3s ease}
-header.is-stuck{box-shadow:0 1px 18px rgba(27,23,19,.07)}
-header .wm{--bw-word:var(--bark);--bw-rule:var(--blaze);--bw-rule-w:1.5px;text-shadow:none}
+  align-items:center;background:#F2EDE2;background-color:#F2EDE2;
+  border-bottom:2px solid var(--blaze);
+  box-shadow:0 2px 14px rgba(27,23,19,.10)}
+header.is-stuck{box-shadow:0 3px 20px rgba(27,23,19,.14)}
+header .wm{--bw-word:#1B1713;--bw-rule:#E0611F;--bw-rule-w:1.5px;text-shadow:none;transition:none}
 main.wrap{padding-top:8px}
 .pv-band{position:relative;margin-top:76px;height:clamp(300px,46vh,500px);overflow:hidden;background:var(--shadow)}
 .pv-band img{width:100%;height:100%;object-fit:cover;object-position:50% 10%}
@@ -61,7 +61,7 @@ address{font-style:normal;line-height:1.7}
   <p>This page explains, in plain terms, what happens to your information.</p>
 
   <h2>What we collect</h2>
-  <p>If you sign up for the field guide or our field notes, we collect your email address and the date and source of your signup. If you contact us directly, we keep that correspondence. That's it — we don't ask for your name, address, or phone number to receive the guide.</p>
+  <p>If you sign up for the field guide or our field notes, we collect your email address and the date and source of your signup. If you contact us directly, we keep that correspondence. That's it. We don't ask for your name, address, or phone number to receive the guide.</p>
   <p>Our website may collect basic, aggregate visit statistics (pages viewed, general region, referring site). This is not tied to you personally.</p>
 
   <h2>How we use it</h2>
