@@ -64,6 +64,15 @@ p{margin:0 0 18px}
   display:flex;align-items:center;
   background:transparent;border-bottom:1px solid transparent;
   transition:background .3s ease,border-color .3s ease,box-shadow .3s ease}
+/* a short scrim behind the bar only, so the wordmark reads over a bright sky
+   without darkening the rest of the photograph */
+.nav::before{content:"";position:absolute;left:0;right:0;top:0;height:170px;pointer-events:none;
+  background:linear-gradient(180deg,rgba(27,23,19,.58) 0%,rgba(27,23,19,.30) 42%,rgba(27,23,19,0) 100%);
+  transition:opacity .3s ease}
+.nav.is-stuck::before{opacity:0}
+.nav__in{position:relative;z-index:1}
+/* blaze rules on the wordmark in both states, so only the background changes on scroll */
+.nav .wm{--bw-rule:var(--blaze);--bw-rule-w:2px}
 .nav__in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;width:100%}
 .nav__left{justify-self:start;display:flex;align-items:center}
 .nav__right{justify-self:end}
@@ -75,6 +84,7 @@ p{margin:0 0 18px}
 .nav.is-stuck .nav__cta{color:var(--bone);border-bottom-color:rgba(242,237,226,.28)}
 .nav.is-stuck .nav__cta:hover{color:var(--blaze);border-color:var(--blaze)}
 .nav .wm{font-size:clamp(26px,2.3vw,29px)}
+.nav.is-stuck .wm{--bw-rule-w:2px}
 .nav.is-stuck{background:rgba(27,23,19,.93);border-bottom-color:var(--blaze);
   -webkit-backdrop-filter:saturate(1.15) blur(10px);backdrop-filter:saturate(1.15) blur(10px);
   box-shadow:0 1px 20px rgba(0,0,0,.28)}
