@@ -106,13 +106,29 @@ body.menu-open .burger span{background:var(--bone)}
 
 .menu{position:fixed;inset:0;z-index:55;background:var(--shadow);
   display:flex;align-items:center;justify-content:center;
+  padding:calc(var(--navh) + 20px) 20px 44px;overflow-y:auto;
   opacity:0;visibility:hidden;transition:opacity .32s ease,visibility .32s}
+@media (max-height:820px){
+  .menu a{font-size:clamp(22px,3vw,30px)}
+  .menu li{margin:0 0 9px}
+  .menu .m-drop a{font-size:17px}
+  .menu .m-small{margin-top:22px;font-size:11px}
+  
+}
 body.menu-open .menu{opacity:1;visibility:visible}
-.menu ul{list-style:none;margin:0;padding:0;text-align:center}
+.menu ul{list-style:none;margin:auto;padding:0;text-align:center}
 .menu li{margin:0 0 14px}
-.menu .m-head{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--label);margin:0 0 10px}
-.menu .m-sub{margin:0 0 9px}
-.menu .m-sub a{font-size:22px;opacity:.9}
+.menu .m-group{position:relative}
+.menu .m-drop{list-style:none;margin:0;padding:0;max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .3s ease,opacity .22s ease,margin .3s ease}
+.menu .m-drop li{margin:0 0 6px}
+.menu .m-drop a{font-size:21px;opacity:.86;padding:.1em .28em}
+@media (hover:hover){
+  .menu .m-group:hover .m-drop,.menu .m-group:focus-within .m-drop{max-height:240px;opacity:1;margin:8px 0 2px}
+}
+@media (hover:none){
+  .menu .m-drop{max-height:none;opacity:1;margin:8px 0 2px}
+}
 .menu a{font-family:var(--display);font-weight:600;color:var(--bone);
   font-size:clamp(28px,4.6vw,44px);letter-spacing:-.01em;text-decoration:none;
   display:inline-block;line-height:1.12;padding:.16em .28em;
@@ -391,9 +407,13 @@ h2.head{font-family:var(--display);font-weight:600;color:var(--bark);
 <nav class="menu" id="menu" aria-hidden="true">
   <ul>
     <li><a href="index.html#guide">The Heat Guide</a></li>
-    <li class="m-head">Notes From The Field</li>
-    <li class="m-sub"><a href="how-hot-is-too-hot-to-run-a-dog.html">How hot is too hot to run a dog?</a></li>
-    <li class="m-sub"><a href="can-you-put-an-overheated-dog-in-cold-water.html">Can you put an overheated dog in cold water?</a></li>
+    <li class="m-group">
+      <a href="how-hot-is-too-hot-to-run-a-dog.html">Notes From The Field</a>
+      <ul class="m-drop">
+        <li><a href="how-hot-is-too-hot-to-run-a-dog.html">How hot is too hot to run a dog?</a></li>
+        <li><a href="can-you-put-an-overheated-dog-in-cold-water.html">Can you put an overheated dog in cold water?</a></li>
+      </ul>
+    </li>
     <li><a href="index.html#standard">The Brushworn Standard</a></li>
     <li><a href="index.html#coming">What's coming</a></li>
     <li><a href="index.html#about">Who's behind it</a></li>
